@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  bank_app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/my-bank
+    environment:
+      - FLASK_ENV=development

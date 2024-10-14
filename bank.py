@@ -1,43 +1,60 @@
+from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+
 balance = 10000.00
 
 def check_balance():
     print(f"Your currant balance is = {balance}")
 
-def deposit():
-    depo_ammount = float(input("How much do you want to deposit = "))
-    balance += depo_ammount
-    print(f"Deposited ammount {depo_ammount} successfull.\nNew balance is = {balance}")
+def deposit(amount):
+    global balance
+    balance += amount
+    print(f"Deposited ammount {amount} successfull.\nNew balance is = {balance}")
 
-def withdraw():
-    if wi_balance > balance:
-        print("Insufficient ammount, please recharge your account.")
+def withdraw(amount):
+    global balance
+    if amount > balance:
+        return "Insufficient ammount, please recharge your account"
     else:
-        wi_balance = float(input("How much do you want to withdraw : "))
-        balance -= wi_balance
-        print(f"Withdraw ammount {wi_balance} successfull, new balance is = {balance}")
+        balance -= amount
+        return f"Withdrawal amount {amount} successful, new balance is = {balance}"
 
-print("Welcome to XYZ Bank Limited. Please enter username and password to login.")
+# Define routes
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-username = input("Username : ")
-password = input("Password : ")
+@app.route('/balance')
+def show_balance():
+    return check_balance()
 
-if username == "junaid" and password == "123qaz" :
-    print("Welcome to XYZBL online portal")
+@app.route('/deposit', methods=['GET', 'POST'])
+def make_deposit():
+    if request.method == 'POST':
+        amount = float(request.form['amount'])
+        result = deposit(amount)
+        return result
+    return render_template('deposit.html')
 
-    while True:
-        print("Please enter number to aquire service :")
-        print("1. Check Balance\n2. Withdraw\n3. Deposit\n4. Exit")
-        choice = int(input("Choice : "))
+@app.route('/withdraw', methods=['GET', 'POST'])
+def make_withdrawal():
+    if request.method == 'POST':
+        amount = float(request.form['amount'])
+        result = withdraw(amount)
+        return result
+    return render_template('withdraw.html')
 
-        if choice == 1:
-            check_balance()
-        elif choice == 2:
-            withdraw()
-        elif choice == 3:
-            deposit()
-        elif choice == 4:
-            break
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == "junaid" and password == "123wsx":
+            return redirect(url_for('home'))
         else:
-            print("Wrong input. Please enter valid number.")
+            return "Invalid credentials. Please try again."
+    return render_template('login.html')
 
-print("Thanks for being with us.\nHope to see you again soon.\nHave a good day.")
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=5000)

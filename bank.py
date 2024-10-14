@@ -1,24 +1,26 @@
 from flask import Flask, render_template, request, redirect, url_for
+import logging
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG)
 
 balance = 10000.00
 
 def check_balance():
-    print(f"Your currant balance is = {balance}")
+    return f"Your current balance is = {balance:.2f}"
 
 def deposit(amount):
     global balance
     balance += amount
-    print(f"Deposited ammount {amount} successfull.\nNew balance is = {balance}")
+    return f"Deposited amount {amount} successfully.\nNew balance is = {balance:.2f}"
 
 def withdraw(amount):
     global balance
     if amount > balance:
-        return "Insufficient ammount, please recharge your account"
+        return "Insufficient balance, please recharge your account"
     else:
         balance -= amount
-        return f"Withdrawal amount {amount} successful, new balance is = {balance}"
+        return f"Withdrawal of {amount} successful, new balance is = {balance:.2f}"
 
 # Define routes
 @app.route('/')
@@ -27,22 +29,29 @@ def home():
 
 @app.route('/balance')
 def show_balance():
-    return check_balance()
+    result = check_balance()
+    return f"<h3>{result}</h3>"
 
 @app.route('/deposit', methods=['GET', 'POST'])
 def make_deposit():
     if request.method == 'POST':
-        amount = float(request.form['amount'])
-        result = deposit(amount)
-        return result
+        try:
+            amount = float(request.form['amount'])
+            result = deposit(amount)
+            return f"<h3>{result}</h3>"
+        except ValueError:
+            return "Invalid input, please enter a numeric value."
     return render_template('deposit.html')
 
 @app.route('/withdraw', methods=['GET', 'POST'])
 def make_withdrawal():
     if request.method == 'POST':
-        amount = float(request.form['amount'])
-        result = withdraw(amount)
-        return result
+        try:
+            amount = float(request.form['amount'])
+            result = withdraw(amount)
+            return f"<h3>{result}</h3>"
+        except ValueError:
+            return "Invalid input, please enter a numeric value."
     return render_template('withdraw.html')
 
 @app.route('/login', methods=['GET', 'POST'])

@@ -15,5 +15,25 @@ The **My Bank** app is a simple web application built using Flask and Werkzeug. 
    git clone https://github.com/yourusername/my-bank.git
    cd my-bank
    ```
+2. Install flask
+   ```bash
+      pip install flask
+   ```
+3. Create a requirements.txt file and add Flask==2.0.2 and Wrekzeug==2.0.2 into it.
+4. Create Dockerfile to send instruction to build the app.
+5. Create docker-compose.yml to version control.
+6. Create templates: Create a templates and create index.html, login.html, deposit.html, withdraw.html inside templates.
 
-   
+## Example structure
+```perl
+├── my-bank/
+	│   ├── bank.py
+	│   ├── templates/
+	│   │   ├── index.html
+	│   │   ├── login.html
+	│   │   ├── deposit.html
+	│   │   └── withdraw.html
+	│   ├── requirements.txt
+	│   ├── Dockerfile
+	│   └── docker-compose.yml
+```

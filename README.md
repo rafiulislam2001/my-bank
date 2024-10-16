@@ -57,7 +57,7 @@ The **My Bank** app is a simple web application built using Flask and Werkzeug. 
    ```bash
 	docker run -d -p 5000:5000 my-bank
    ```
- 3. Now on your favourite brouser type "http://localhost:4566" and see the magic.
+ 3. Now on your favourite brouser type "http://localhost:5000" and see the magic.
 
 
 ## Licence

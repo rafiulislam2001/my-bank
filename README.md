@@ -40,25 +40,28 @@ The **My Bank** app is a simple web application built using Flask and Werkzeug. 
 
 ## Running the app:
 ### Without docker:
-1. Run the flask app:
+ 1. Run the flask app:
   ```bash
 	python bank.py
   ```
-3. Access the app:
+ 2. Access the app:
   ```bash
 	curl http://localhost:5000
   ```
 ### With docker:
-1. Build the application:
+ 1. Build the application:
    ```bash
 	docker build -t 5000:5000 my-bank .
    ```
-3. Run the application:
+ 2. Run the application:
    ```bash
 	docker run -d -p 5000:5000 my-bank
    ```
+ 3. Now on your favourite brouser type "http://localhost:4566" and see the magic.
 
 
+## Licence
+Anyone can use, edit and share this repository. Happy Learning :-)
 
 
 

@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable
-ENV FLASK_APP=bank.py
+ENV FLASK_APP=app.py
 
 # Run the application
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]

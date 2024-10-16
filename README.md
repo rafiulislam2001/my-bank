@@ -48,8 +48,7 @@ The **My Bank** app is a simple web application built using Flask and Werkzeug. 
   ```bash
 	curl http://localhost:5000
   ```
-
-### Without docker:
+### With docker:
 1. Build the application:
    ```bash
 	docker build -t 5000:5000 my-bank .

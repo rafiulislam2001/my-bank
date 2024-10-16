@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import logging
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
+
+app.secret_key = 'supersecretkey'
 
 balance = 10000.00
 
@@ -25,7 +27,10 @@ def withdraw(amount):
 # Define routes
 @app.route('/')
 def home():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     return render_template('index.html')
+
 
 @app.route('/balance')
 def show_balance():
@@ -59,11 +64,22 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        
+        # Simple username/password check
         if username == "junaid" and password == "123wsx":
-            return redirect(url_for('home'))
+            session['username'] = username  # Mark user as logged in
+            return redirect(url_for('home'))  # Redirect to home page after login
         else:
             return "Invalid credentials. Please try again."
+    
+    # Render login page for GET request
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -1,17 +1,17 @@
-#####Running a simple app on web
+#####Running a simple app on web#####
 
-###Overview:
+###Overview:###
 The My Bank app is a simple web built using Flask and Wrekzueg. It allows users secretly login into bank’s web portal and allows to check balance, withdraw and deposit. This README file provide step-by-step guide on how to set up, run, and test the application, both locally and using Docker.
 
 
-###Technologies used: 
+###Technologies used:###
 Flask: A lightweight WSGI web application framework in python.
 Wrekzueg: Manage the underlying technical details of the web framework.
 HTML: For front-end user interface design.
 Docker: For containerization the application. 
 
 
-###Installatione:
+###Installatione:###
 1. Clone the repository and enter into it:
   ```
 	git clone https://github.com/yourusername/my-bank.git
@@ -26,7 +26,7 @@ Docker: For containerization the application.
 7. Create docker-compose.yml to version control.
 8. Create templates: Create a templates and create index.html, login.html, deposit.html, withdraw.html inside templates.
 
-	##Example structure
+	##Example structure###
 	├── my-bank/
 	│   ├── bank.py
 	│   ├── templates/
@@ -39,8 +39,8 @@ Docker: For containerization the application.
 	│   └── docker-compose.yml
 
 
-###Running the app:
-#Without docker:
+###Running the app:###
+#Without docker:#
 1. Run the flask app:
   ```
 	python bank.py
@@ -50,7 +50,7 @@ Docker: For containerization the application.
 	curl http://localhost:5000
   ```
 
-#Without docker
+#Without docker#
 1. Build the application:
    ```
 	docker build -t 5000:5000 my-bank .

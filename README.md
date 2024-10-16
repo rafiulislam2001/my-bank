@@ -24,9 +24,9 @@ The **My Bank** app is a simple web application built using Flask and Werkzeug. 
 5. Create docker-compose.yml to version control.
 6. Create templates: Create a templates and create index.html, login.html, deposit.html, withdraw.html inside templates.
 
-## Example structure
+### Example structure
 ```perl
-├── my-bank/
+	├── my-bank/
 	│   ├── bank.py
 	│   ├── templates/
 	│   │   ├── index.html
@@ -37,3 +37,54 @@ The **My Bank** app is a simple web application built using Flask and Werkzeug. 
 	│   ├── Dockerfile
 	│   └── docker-compose.yml
 ```
+
+## Running the app:
+### Without docker:
+1. Run the flask app:
+  ```bash
+	python bank.py
+  ```
+3. Access the app:
+  ```bash
+	curl http://localhost:5000
+  ```
+
+### Without docker:
+1. Build the application:
+   ```bash
+	docker build -t 5000:5000 my-bank .
+   ```
+3. Run the application:
+   ```bash
+	docker run -d -p 5000:5000 my-bank
+   ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
